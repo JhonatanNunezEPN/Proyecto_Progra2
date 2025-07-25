@@ -7,8 +7,8 @@ public class CuentaCajaAhorro extends Cuenta {
 	private int movAnuales;
 	
 	//Constructor
-	public CuentaCajaAhorro(int numero, double saldo, Cliente cliente, List<Transaccion> transacciones, int movAnuales) {
-		super(numero, saldo, cliente, transacciones);
+	public CuentaCajaAhorro(int numero, Cliente cliente, int movAnuales) {
+		super(numero, cliente);
 		this.movAnuales = movAnuales;
 	}
 
@@ -29,7 +29,7 @@ public class CuentaCajaAhorro extends Cuenta {
 				filter(transaccion -> Hora.getInstancia().year(transaccion.getFecha()) == yearActual).
 				count();
 		
-		return cantMovActuales < yearActual;
+		return cantMovActuales < movAnuales;
 	}
 
 }

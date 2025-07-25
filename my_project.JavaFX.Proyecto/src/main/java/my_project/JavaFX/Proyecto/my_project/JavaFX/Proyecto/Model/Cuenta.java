@@ -1,5 +1,6 @@
 package my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.*;
@@ -12,12 +13,12 @@ public abstract class Cuenta {
 	private List<Transaccion> transacciones;
 	
 	//Constructor
-	public Cuenta(int numero, double saldo, Cliente cliente, List<Transaccion> transacciones) {
+	public Cuenta(int numero, Cliente cliente) {
 		super();
 		this.numero = new SimpleIntegerProperty(numero);
-		this.saldo = new SimpleDoubleProperty(saldo);
+		this.saldo = new SimpleDoubleProperty(0);
 		this.cliente = cliente;
-		this.transacciones = transacciones;
+		this.transacciones = new ArrayList<Transaccion>();
 	}
 
 	public int getNumero() {
@@ -78,6 +79,10 @@ public abstract class Cuenta {
 		
 		if(monto > this.getSaldo()) {		//Verificamos que el saldo sea suficiente
 			throw new RuntimeException("Saldo insuficiente");
+		}
+		
+		if(monto < 0) {		//Verificamos que el saldo sea suficiente
+			throw new RuntimeException("Monto invalido");
 		}
 		
 		this.setSaldo(this.getSaldo() - monto);		//Realizamos el retiro

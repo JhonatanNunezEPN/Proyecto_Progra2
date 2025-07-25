@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CuentaCorriente extends Cuenta {
 	//Constructor
-	public CuentaCorriente(int numero, double saldo, Cliente cliente, List<Transaccion> transacciones) {
-		super(numero, saldo, cliente, transacciones);
+	public CuentaCorriente(int numero, Cliente cliente) {
+		super(numero, cliente);
 	}
 
 	@Override

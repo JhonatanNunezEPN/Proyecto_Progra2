@@ -4,31 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Cliente {
 	//Atributos
-	private int id;
+	private SimpleIntegerProperty id;
 	private SimpleStringProperty nombre;
-	private String telefono;
+	private SimpleStringProperty telefono;
 	private List<Cuenta> cuentas;
 	
 	//Constructor
 	public Cliente(int id, String nombre, String telefono) {
 		super();
-		this.id = id;
+		this.id = new SimpleIntegerProperty(id);
 		this.nombre = new SimpleStringProperty(nombre);
-		this.telefono = telefono;
+		this.telefono = new SimpleStringProperty(telefono);
 		this.cuentas = new ArrayList<Cuenta>();
 	}
 
 	//Encapsulamiento
 	public int getId() {
-		return id;
+		return id.get();
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id.set(id);
 	}
 
 	public String getNombre() {
@@ -40,11 +41,11 @@ public class Cliente {
 	}
 
 	public String getTelefono() {
-		return telefono;
+		return telefono.get();
 	}
 
 	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+		this.telefono.set(telefono);
 	}
 
 	public List<Cuenta> getCuentas() {
