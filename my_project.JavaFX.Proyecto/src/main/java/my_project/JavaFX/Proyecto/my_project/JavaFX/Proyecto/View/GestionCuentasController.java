@@ -18,6 +18,7 @@ import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.CuentaCorrien
 import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.NumCuentaDuplicadoException;
 
 public class GestionCuentasController {
+	//Atributos
 	private final GestionCuentasView view;
 	private List<Integer> numCuentas;
 	private List<Integer> idClientes;
@@ -28,6 +29,7 @@ public class GestionCuentasController {
 	
 	public GestionCuentasController(GestionCuentasView view, Button botonCrearCuenta, Button botonBuscarCuenta,
 			Button botonDepositar, Button botonRetirar, Button botonRegresar) {
+		//Creacion de elementos a usar
 		this.view = view;
 		numCuentas = new ArrayList<Integer>();
 		idClientes = view.getBanco().getClientes().stream().map(Cliente :: getId).collect(Collectors.toList());
@@ -41,6 +43,7 @@ public class GestionCuentasController {
 				int numCuenta = Integer.parseInt(view.getNumCuentaInput().getText());
 				String tipo = view.getTipoCuenta().getValue();
 				
+				//Verificacion de requisitos
 				if(numCuentas.contains(numCuenta)) {
 					throw new NumCuentaDuplicadoException(numCuenta);
 				}else if(!idClientes.contains(id)) {
@@ -52,6 +55,7 @@ public class GestionCuentasController {
 						findFirst().orElse(null);
 			
 				
+				//Switch que creara una cuenta dependiendo el TextField
 				switch(tipo) {
 				case "Caja Ahorro":{
 					int movAnuales = Integer.parseInt(view.getMaxMovimientosInput().getText());
@@ -62,7 +66,7 @@ public class GestionCuentasController {
 					view.getMaxMovimientosInput().clear();
 					cliente.agregarCuenta(cuenta);
 					textoResultado = new Label("Cuenta de caja de ahorro creada exitosamente");
-					escenaResultado = new Scene(textoResultado, 200, 100);
+					escenaResultado = new Scene(textoResultado, 400, 100);
 					stageResultado.setScene(escenaResultado);
 					stageResultado.show();
 					break;
@@ -76,7 +80,7 @@ public class GestionCuentasController {
 					view.getMaxMovimientosInput().clear();
 					cliente.agregarCuenta(cuenta);
 					textoResultado = new Label("Cuenta corriente creada exitosamente");
-					escenaResultado = new Scene(textoResultado, 200, 100);
+					escenaResultado = new Scene(textoResultado, 400, 100);
 					stageResultado.setScene(escenaResultado);
 					stageResultado.show();
 					break;
@@ -87,19 +91,19 @@ public class GestionCuentasController {
 					view.getNumCuentaInput().clear();
 					view.getMaxMovimientosInput().clear();
 					textoResultado = new Label("No se pudo crear la cuenta");
-					escenaResultado = new Scene(textoResultado, 200, 100);
+					escenaResultado = new Scene(textoResultado, 400, 100);
 					stageResultado.setScene(escenaResultado);
 					stageResultado.show();
 				}
 				}
 			}catch(NumCuentaDuplicadoException exception) {
 				textoResultado = new Label("El numero de cuenta ya esta en uso");
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}catch(ClienteInexistenteException exception) {
 				textoResultado = new Label("El cliente con la id " + exception.getId() + " no existe");
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}
@@ -133,12 +137,12 @@ public class GestionCuentasController {
 				view.getTabla().refresh();
 				
 				textoResultado = new Label("Deposito realizado exitosamente. Su nuevo saldo es de: " + saldo);
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}catch(RuntimeException exception) {
 				textoResultado = new Label("No se pudo realizar el deposito, Ingrese un monto positivo o sus movimientos acabaron");
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}
@@ -157,13 +161,13 @@ public class GestionCuentasController {
 				view.getTabla().refresh();
 				
 				textoResultado = new Label("Deposito realizado exitosamente. Su nuevo saldo es de: " + saldo);
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}catch(RuntimeException exception) {
 				textoResultado = new Label("No se pudo realizar el retiro. Ingrese un monto positivo, "
 						+ "monto mayor a su saldo actual o sus movimientos acabaron");
-				escenaResultado = new Scene(textoResultado, 200, 100);
+				escenaResultado = new Scene(textoResultado, 400, 100);
 				stageResultado.setScene(escenaResultado);
 				stageResultado.show();
 			}

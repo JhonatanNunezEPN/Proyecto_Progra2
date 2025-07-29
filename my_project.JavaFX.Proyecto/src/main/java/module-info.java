@@ -5,4 +5,5 @@ module my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto {
 	requires javafx.graphics;
 	requires javafx.base;
     exports my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto;
+    exports my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Juego2;
 }

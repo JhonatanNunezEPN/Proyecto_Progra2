@@ -14,6 +14,7 @@ import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.IdDuplicadoEx
 import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.NumTelefonoDuplicado;
 
 public class GestionClientesController {
+	//Atributos
 	private final GestionClientesView view;
 	private List<Integer> idClientes;
 	private List<String> numTelClientes;
@@ -24,6 +25,7 @@ public class GestionClientesController {
 	
 	public GestionClientesController(GestionClientesView view, Button botonAgregarCliente,
 			Button botonBuscarCliente, Button botonRegresar) {
+		//Creacion de elementos a usar
 		this.view = view;
 		idClientes = new ArrayList<Integer>();
 		numTelClientes = new ArrayList<String>();
@@ -31,21 +33,25 @@ public class GestionClientesController {
 		view.getTabla().setItems(listaFiltradaClientes);
 		stageResultado = new Stage();
 		
+		//Aplicar acciones para los botones cuando se los aplastan
 		botonAgregarCliente.setOnAction(e -> {
 			try {
 				int id = Integer.parseInt(view.getIdInput().getText());
 				String nombre = view.getNombreInput().getText();
 				String numTelefono = view.getNumTelefonoInput().getText();
 				
+				//Verificacion de restricciones
 				if(idClientes.contains(id)) {
 					throw new IdDuplicadoException(id);
 				}else if(numTelClientes.contains(numTelefono)) {
 					throw new NumTelefonoDuplicado(numTelefono);
 				}
 				
+				//Agregar datos obtenidos
 				idClientes.add(id);
 				numTelClientes.add(numTelefono);
 				Cliente cliente = new Cliente(id, nombre, numTelefono);
+				//Limpar la interfaz
 				view.getClientes().add(cliente);
 				view.getIdInput().clear();
 				view.getNombreInput().clear();

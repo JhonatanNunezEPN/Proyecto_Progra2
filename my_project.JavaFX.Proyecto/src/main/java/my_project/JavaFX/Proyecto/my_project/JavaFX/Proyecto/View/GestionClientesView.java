@@ -20,6 +20,7 @@ import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.Cliente;
 import my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.Model.Cuenta;
 
 public class GestionClientesView {
+	//Atributos
 	private TableView<Cliente> tabla;
 	private ObservableList<Cliente> clientes;
 	private TextField idInput;

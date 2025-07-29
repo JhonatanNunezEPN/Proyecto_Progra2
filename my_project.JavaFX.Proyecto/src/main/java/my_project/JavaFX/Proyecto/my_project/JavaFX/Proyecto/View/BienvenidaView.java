@@ -15,14 +15,17 @@ public class BienvenidaView {
 	private Banco bancoOriginal;
 	
 	public BienvenidaView(Stage stage, Banco banco) {
+		//Copias del stage y del banco
 		stageOriginal = stage;
 		bancoOriginal = banco;
+		//Creacion de elementos que iran en la interfaz visual
 		Label textoBienvenida = new Label("Bienvenido Bancario EPN");
 		Button botonGestionClientes = new Button("Gestion de Clientes");
 		Button botonGestionCuentas = new Button("Gestion de Cuentas");
 		HBox hBoxBotones = new HBox(50, botonGestionClientes, botonGestionCuentas);
 		VBox layout = new VBox(70, textoBienvenida, hBoxBotones);
 		
+		//Configuraciones de los elementos
 		textoBienvenida.setStyle(
 								 "-fx-font-size: 30px;" +
 								 "-fx-text-fill: white;" +
@@ -67,6 +70,7 @@ public class BienvenidaView {
 		new BienvenidaController(this, botonGestionClientes, botonGestionCuentas);
 	}
 	
+	//Metodos para acceder al stage y al banco
 	public Stage getStage() {
 		return stageOriginal;
 	}
