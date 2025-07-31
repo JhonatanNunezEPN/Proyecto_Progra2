@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class JuegoView {
+	//Declarar recursos para el view
     private Stage stage;
     private GridPane tableroGrid;
     private Button[] botonesColumna;
@@ -18,6 +19,7 @@ public class JuegoView {
     private Label estadoLabel;
 
     public JuegoView(Stage stage) {
+    	//Inicializar los recursos
         this.stage = stage;
         VBox layout = new VBox(20);
         layout.setPadding(new Insets(15));
@@ -30,12 +32,14 @@ public class JuegoView {
         tableroGrid.setVgap(5);
         tableroGrid.setPadding(new Insets(10));
 
-        // 6 filas x 7 columnas
+        // 6 filas x 7 columnas para el tablero
         celdas = new Circle[6][7];
         botonesColumna = new Button[7];
 
         HBox botones = new HBox(5);
         botones.setAlignment(Pos.CENTER);
+        
+        //Bucle para crear los botones
         for (int col = 0; col < 7; col++) {
             Button boton = new Button("↓");
             boton.setPrefWidth(40);
@@ -44,6 +48,7 @@ public class JuegoView {
             botones.getChildren().add(boton);
         }
 
+        //Bucle para crear las celdas
         for (int fila = 0; fila < 6; fila++) {
             for (int col = 0; col < 7; col++) {
                 Circle circulo = new Circle(20, Color.LIGHTGRAY); // celda vacía
@@ -55,6 +60,7 @@ public class JuegoView {
             }
         }
 
+        //Agregar todo al view final
         layout.getChildren().addAll(estadoLabel, botones, tableroGrid);
         Scene scene = new Scene(layout, 500, 500);
         stage.setTitle("Cuatro en Línea");

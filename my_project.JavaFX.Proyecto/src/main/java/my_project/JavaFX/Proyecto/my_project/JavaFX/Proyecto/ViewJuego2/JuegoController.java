@@ -55,7 +55,7 @@ public class JuegoController {
         if (color == FichaColor.ROJO) {
             celda.setFill(Color.RED);
         } else if (color == FichaColor.AZUL) {
-            celda.setFill(Color.WHITE);
+            celda.setFill(Color.BLUE);
         }
     }
 

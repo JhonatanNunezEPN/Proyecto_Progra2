@@ -1,13 +1,20 @@
 package my_project.JavaFX.Proyecto.my_project.JavaFX.Proyecto.ModelJuego2;
 
 public class Tablero {
+	
+	//Constantes para el tamaño del tablero
     private final int FILAS = 6;
     private final int COLUMNAS = 7;
+    
+    //Matriz 6x7 que guarda el estado de cada celda (ROJO, BLANCO, VACIO).
     private FichaColor[][] tablero;
     private FichaColor turnoActual;
 
     public Tablero() {
+    	//Inicializa la matriz de celdas.
         tablero = new FichaColor[FILAS][COLUMNAS];
+        
+        //Llena toda la matriz con VACIO, indicando que todas las celdas están libres.
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
                 tablero[i][j] = FichaColor.VACIO;
@@ -15,7 +22,8 @@ public class Tablero {
         }
         turnoActual = FichaColor.ROJO; // Rojo comienza por defecto
     }
-
+    
+    // Getters y método para alternar entre los jugadores.
     public FichaColor[][] getTablero() {
         return tablero;
     }
@@ -27,8 +35,10 @@ public class Tablero {
     public void cambiarTurno() {
         turnoActual = (turnoActual == FichaColor.ROJO) ? FichaColor.AZUL : FichaColor.ROJO;
     }
-
+    
+    //Intenta insertar una ficha en la columna indicada.
     public int insertarFicha(int columna) {
+    	//Recorre de abajo hacia arriba para encontrar la primera celda vacía. Inserta allí la ficha y retorna la fila.
         for (int fila = FILAS - 1; fila >= 0; fila--) {
             if (tablero[fila][columna] == FichaColor.VACIO) {
                 tablero[fila][columna] = turnoActual;
@@ -37,12 +47,15 @@ public class Tablero {
         }
         return -1; // columna llena
     }
-
+    
+    //Verifica si la primera fila ya está ocupada, lo cual indica que la columna está llena.
     public boolean columnaLlena(int columna) {
         return tablero[0][columna] != FichaColor.VACIO;
     }
-
+    
+    //Lógica completa para verificar si hay un ganador o empate.
     public EstadoJuego verificarEstado() {
+    	//Recorre cada celda del tablero. Si está vacía, salta.
         // Revisar todas las direcciones
         for (int fila = 0; fila < FILAS; fila++) {
             for (int col = 0; col < COLUMNAS; col++) {
@@ -82,7 +95,8 @@ public class Tablero {
                 }
             }
         }
-
+        
+        //Si no hay ganador, y hay espacios → el juego sigue. Si no hay espacios, hay empate.
         // Verificar empate
         boolean hayEspacios = false;
         for (int col = 0; col < COLUMNAS; col++) {
@@ -94,8 +108,10 @@ public class Tablero {
 
         return hayEspacios ? EstadoJuego.EN_CURSO : EstadoJuego.EMPATE;
     }
-
+    
+    //Método para resetear el tablero a estado inicial.
     public void reiniciar() {
+    	//Borra el tablero y vuelve a dar el turno al rojo.
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
                 tablero[i][j] = FichaColor.VACIO;
